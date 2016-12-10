@@ -47,5 +47,5 @@ module.exports= function(app){
     }));
 
     var authRouter = require('../Routes/authRoutes')(passport);
-    app.user(authRouter);
+    app.use(authRouter);
 };
