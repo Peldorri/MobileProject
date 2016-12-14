@@ -1,4 +1,5 @@
 var Requests= require('../Models/requestModel');
+var bCrypt = require('bcrypt-nodejs');
 
 var userController= function(Users){
 
@@ -13,7 +14,7 @@ var userController= function(Users){
 
   var get= function(req,res){
     var query={};
-
+console.log('zzzz');
     if(req.query.name){
 
       query.name=req.query.name;
@@ -24,6 +25,7 @@ var userController= function(Users){
         if(err)
             res.status(500).send(err);
         else {
+
             res.json(users);
         }
     });
@@ -71,6 +73,54 @@ var userController= function(Users){
 
   });
 
+  var signup= (function(req, email, password, done) {
+
+            findOrCreateUser = function(){
+                // find a user in Mongo with provided username
+                console.log('test');
+                Users.findOne({ 'email' :  email }, function(err, user) {
+                    // In case of any error, return using the done method
+                    if (err){
+                        console.log('Error in SignUp: '+err);
+                        return done(err);
+                    }
+                    // already exists
+                    if (user) {
+                        console.log('User already exists with email: '+email);
+                        return done(null, false, req.flash('message','User Already Exists'));
+                    } else {
+                        // if there is no user with that email
+                        // create the user
+                        console.log('test');
+                        var newUser = new Users();
+
+                        // set the user's local credentials
+                        newUser.catergory = catergory;
+                        newUser.password = createHash(password);
+                        newUser.email = req.param('email');
+                        newUser.name = req.param('name');
+                        newUser.number = req.param('number');
+
+                        // save the user
+                        newUser.save(function(err) {
+                            if (err){
+                                console.log('Error in Saving user: '+err);
+                                throw err;
+                            }
+                            console.log('User Registration succesful');
+                            return done(null, newUser);
+                        });
+                    }
+                });
+            };
+            // Delay the execution of findOrCreateUser and execute the method
+            // in the next tick of the event loop
+            process.nextTick(findOrCreateUser);
+        });
+
+
+
+
 
 
   return{
@@ -78,7 +128,13 @@ var userController= function(Users){
     get:get,
     patch:patch,
     delete:remove,
-    pushRequests:pushRequests
+    pushRequests:pushRequests,
+    signup:signup
   }
+  var createHash = function(password){
+      return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+  }
+
+
 }
 module.exports=userController;

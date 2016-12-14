@@ -10,7 +10,10 @@ var userController= require('../Controllers/userController')(Users);
             .get(userController.get);
 
   userRouters.route('/:userId/requests')
-              .post(userController.pushRequests);
+            .post(userController.pushRequests);
+
+  userRouters.route('/signup')
+            .post(userController.signup);
 
   userRouters.use('/:userId',function(req,res,next){
         Users.findById(req.params.userId,function(err,user){

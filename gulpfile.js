@@ -7,7 +7,7 @@ gulp.task('default', function(){
         script:'app.js',                                                        // what it is going to run
         ext:'js',
         env: {
-          PORT:8000
+          PORT:3000
         },
         ignore:['./node_modules/**']                                            //what extension to look for
     })
