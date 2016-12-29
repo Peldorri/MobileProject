@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "821381589433",
+    "firebase_url": "https://prefixworkerapplication-166cd.firebaseio.com",
+    "project_id": "prefixworkerapplication-166cd",
+    "storage_bucket": "prefixworkerapplication-166cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821381589433:android:add997be0164cbb8",
+        "android_client_info": {
+          "package_name": "com.noha.prefixworkerapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "821381589433-77u35pap605o782ufa7lck3rm612j19e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.noha.prefixworkerapplication",
+            "certificate_hash": "42D68CD2F83B990FF6AB9B6D882EF8533E3231A1"
+          }
+        },
+        {
+          "client_id": "821381589433-n2ft344mltuhlllh4pac754moj1vlktk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiPdn4YfGkcS5vwdlvyST3FOXa_5xgRHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "821381589433-n2ft344mltuhlllh4pac754moj1vlktk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

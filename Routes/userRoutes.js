@@ -6,7 +6,6 @@ var userRouters= express.Router();
 
 var userController= require('../Controllers/userController')(Users);
   userRouters.route('/')
-            .post(userController.post)
             .get(userController.get);
 
   userRouters.route('/:userId/requests')

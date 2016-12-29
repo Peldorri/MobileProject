@@ -63,8 +63,10 @@ var consumerController= function(Consumers){
           res.status(500).send(err);
         else if(consumer){
           req.consumer=consumer;
+
           consumer.requests.push(requests)
           consumer.save();
+          require('./notificationController')('1','2');
           res.status(201).send(consumer);
         }
       });

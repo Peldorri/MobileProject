@@ -13,10 +13,11 @@ var user= new Schema ({
 
   name: String,
   email: String,
-  number: Number,
+  number: String,
   password: String,
   rate: Number,
   catergory: String,
+
   location:[subLocation],
   requests: [{ type: Schema.Types.ObjectId, ref: 'request' }]
 

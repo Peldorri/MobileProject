@@ -3,13 +3,6 @@ var bCrypt = require('bcrypt-nodejs');
 
 var userController= function(Users){
 
-    var post= function(req,res){
-
-      var user=new Users(req.body);
-
-      user.save();
-      res.status(201).send(user);
-    }
 
 
   var get= function(req,res){
@@ -73,42 +66,41 @@ console.log('zzzz');
 
   });
 
-  var signup= (function(req, email, password, done) {
+  var signup= (function(req, res) {
 
             findOrCreateUser = function(){
                 // find a user in Mongo with provided username
-                console.log('test');
-                Users.findOne({ 'email' :  email }, function(err, user) {
+
+                Users.findOne({ 'email' :  req.body.email }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err){
                         console.log('Error in SignUp: '+err);
-                        return done(err);
+                        return next(err);
                     }
                     // already exists
                     if (user) {
-                        console.log('User already exists with email: '+email);
-                        return done(null, false, req.flash('message','User Already Exists'));
+                        return res.status(200).json({
+                          error:"User exists"
+                        });
                     } else {
                         // if there is no user with that email
                         // create the user
-                        console.log('test');
-                        var newUser = new Users();
-
-                        // set the user's local credentials
-                        newUser.catergory = catergory;
-                        newUser.password = createHash(password);
-                        newUser.email = req.param('email');
-                        newUser.name = req.param('name');
-                        newUser.number = req.param('number');
 
                         // save the user
+                        // create the user
+                        var jsonUser = req.body;
+                        jsonUser.password = createHash(req.body.password);
+                        var newUser = new Users(jsonUser);
+
+                        // set the user's local credentials
+                                            // save the user
                         newUser.save(function(err) {
                             if (err){
                                 console.log('Error in Saving user: '+err);
                                 throw err;
                             }
                             console.log('User Registration succesful');
-                            return done(null, newUser);
+                            return res.status(200).json(newUser);
                         });
                     }
                 });
@@ -118,13 +110,16 @@ console.log('zzzz');
             process.nextTick(findOrCreateUser);
         });
 
+        var createHash = function(password){
+            return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+        }
 
 
 
 
 
   return{
-    post:post,
+
     get:get,
     patch:patch,
     delete:remove,
