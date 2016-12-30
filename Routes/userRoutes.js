@@ -11,6 +11,9 @@ var userController= require('../Controllers/userController')(Users);
   userRouters.route('/:userId/requests')
             .post(userController.pushRequests);
 
+  userRouters.route('/:userId/requests')
+            .post(userController.pushRequests);            
+
   userRouters.route('/signup')
             .post(userController.signup);
 

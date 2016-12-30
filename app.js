@@ -63,6 +63,7 @@ app.use(cookieParser());
 
 
 var passportR =require('./Config/passport')(app);
+//var passportC =require('./Config/consumerAuth')(app);
 var userRouters=require('./Routes/userRoutes')(Users);
 var consumerRouters=require('./Routes/consumerRoutes')(Consumers);
 var requestRouters=require('./Routes/requestRoutes')(Requests);

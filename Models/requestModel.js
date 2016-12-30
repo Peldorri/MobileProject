@@ -11,7 +11,8 @@ var subLocation={
 
    catergory: String,
    description: String,
-   avaliableTime: {type: Date, default: Date.now},
+   avaliableTimeStart: {type: Date, default: Date.now},
+   avaliableTimeEnd: {type: Date, default: Date.now},
    location:[subLocation]
 
  });
