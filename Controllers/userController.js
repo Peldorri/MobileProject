@@ -7,7 +7,7 @@ var userController= function(Users){
 
   var get= function(req,res){
     var query={};
-console.log('zzzz');
+
     if(req.query.name){
 
       query.name=req.query.name;
@@ -99,6 +99,38 @@ console.log('zzzz');
             return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
         }
 
+  var acceptRequest= function(req,res){
+      var userId =req.params.userId;
+      var requestId=req.params.requestId;
+      Users.findById(userId,function(err,user){
+          if(err)
+              res.status(500).send(err);
+          else if (user){
+              Requests.findById(requestId,function(err,request){
+              request.worker=user;
+              request.isTaken=true;
+              request.save(function(err) {
+                  if (err){
+                      console.log('Error in Saving user: '+err);
+                      throw err;
+                  }
+                  user.requests.push(request);
+                  user.save(function(err) {
+                      if (err){
+                          console.log('Error in Saving user: '+err);
+                          throw err;
+                      }
+                      console.log('User Registration succesful');
+                      return res.status(200).json(request);
+                  });
+              });
+          });}
+          else{
+
+              res.status(404).send('user not found');
+          }
+      });
+}
 
 
 
@@ -107,7 +139,7 @@ console.log('zzzz');
     get:get,
     patch:patch,
     delete:remove,
-  
+    acceptRequest:acceptRequest,
     signup:signup
   }
   var createHash = function(password){

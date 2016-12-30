@@ -6,7 +6,10 @@ var userRouters= express.Router();
 
 var userController= require('../Controllers/userController')(Users);
   userRouters.route('/')
-            .get(userController.get);      
+            .get(userController.get);
+
+  userRouters.route('/:userId/addrequest/:requestId')
+            .patch(userController.acceptRequest);
 
   userRouters.route('/signup')
             .post(userController.signup);

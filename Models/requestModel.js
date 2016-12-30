@@ -11,7 +11,7 @@ var subLocation={
 
  var request= new Schema ({
 
-   catergory: String,
+   category: String,
    description: String,
    avaliableTimeStart: {type: Date, default: Date.now},
    avaliableTimeEnd: {type: Date, default: Date.now},

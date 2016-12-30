@@ -65,12 +65,12 @@ var consumerController= function(Consumers){
         if(err)
           res.status(500).send(err);
         else if(consumer){
-          req.consumer=consumer;
+          
 
           consumer.requests.push(requests)
           consumer.save();
-          console.log (req.body.catergory,req.body.description);
-          require('./notificationsController')(req.body.catergory,req.body.description);
+
+          require('./notificationsController')(req.body.category,req.body.description);
           res.status(201).send(consumer);
         }
       });
