@@ -4,7 +4,7 @@ var serverkey = 'AIzaSyDCGJozBEDdmfDpBJhhkAwsVQpdcSQh_6o';
 var fcm = FCM(serverkey);
 var fcmFun= function(title, body){
   var message {
-      to : '/topic/All',
+      to : '/topics/Users',
       collapse_key : Math.random().toString(),
       notification : {
           title : title,
