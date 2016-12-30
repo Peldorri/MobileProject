@@ -1,6 +1,6 @@
 var Requests= require('../Models/requestModel');
 var bCrypt = require('bcrypt-nodejs');
-
+var mongoose= require('mongoose');
 var consumerController= function(Consumers){
 
     var post= function(req,res){
@@ -56,7 +56,9 @@ var consumerController= function(Consumers){
   });
 
   var pushRequests= (function(req,res){
-      var requests=new Requests(req.body);
+    var reqjson = req.body;
+    reqjson.consumer = mongoose.Types.ObjectId(req.params.consumerId);
+      var requests=new Requests(reqjson);
       requests.save();
       //res.status(201).send(trip._id);
       Consumers.findById(req.params.consumerId,function(err, consumer){

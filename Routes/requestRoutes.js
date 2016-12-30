@@ -9,7 +9,8 @@ var requestController= require('../Controllers/requestController')(Requests);
             .post(requestController.post)
             .get(requestController.get);
 
-
+requestRouters.route('/nonTaken')
+              .get(requestController.getNonTakenRequests)
   requestRouters.use('/:requestId',function(req,res,next){
         Requests.findById(req.params.requestId,function(err,request){
             if(err)

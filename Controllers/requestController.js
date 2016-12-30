@@ -52,11 +52,25 @@ var requestController= function(Requests){
         });
   });
 
+  var getRequests= function(req,res){
+    var query={isTaken:false};
+
+    Requests.find(query,function(err,requests){
+        if(err)
+            res.status(500).send(err);
+        else {
+            res.json(requests);
+        }
+    });
+  }
+
+
   return{
     post:post,
     get:get,
     patch:patch,
-    delete: remove
+    delete: remove,
+    getNonTakenRequests:getRequests
 
   }
 }

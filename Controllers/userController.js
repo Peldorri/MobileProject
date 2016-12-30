@@ -49,22 +49,7 @@ console.log('zzzz');
         });
       });
 
-  var pushRequests= (function(req,res){
-      var requests=new Requests(req.body);
-      requests.save();
-      //res.status(201).send(trip._id);
-      Consumers.findById(req.params.consumerId,function(err, consumer){
-        if(err)
-          res.status(500).send(err);
-        else if(consumer){
-          req.consumer=consumer;
-          consumer.requests.push(requests)
-          consumer.save();
-          res.status(201).send(consumer);
-        }
-      });
 
-  });
 
   var signup= (function(req, res) {
 
@@ -117,13 +102,12 @@ console.log('zzzz');
 
 
 
-
   return{
 
     get:get,
     patch:patch,
     delete:remove,
-    pushRequests:pushRequests,
+  
     signup:signup
   }
   var createHash = function(password){

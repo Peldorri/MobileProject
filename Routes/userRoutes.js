@@ -6,13 +6,7 @@ var userRouters= express.Router();
 
 var userController= require('../Controllers/userController')(Users);
   userRouters.route('/')
-            .get(userController.get);
-
-  userRouters.route('/:userId/requests')
-            .post(userController.pushRequests);
-
-  userRouters.route('/:userId/requests')
-            .post(userController.pushRequests);            
+            .get(userController.get);      
 
   userRouters.route('/signup')
             .post(userController.signup);
