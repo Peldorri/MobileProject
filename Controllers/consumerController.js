@@ -67,7 +67,8 @@ var consumerController= function(Consumers){
 
           consumer.requests.push(requests)
           consumer.save();
-          require('./notificationController')('1','2');
+          console.log (req.body.catergory,req.body.description);
+          require('./notificationsController')(req.body.catergory,req.body.description);
           res.status(201).send(consumer);
         }
       });
