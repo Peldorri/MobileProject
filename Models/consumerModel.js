@@ -15,7 +15,7 @@ var consumer= new Schema({
     number: String,
     password: String,
     token: String,
-    hasToken:{Type:Boolean, default: false};
+    
     location:[subLocation],
     requests: [{ type: Schema.Types.ObjectId, ref: 'request' }]
 

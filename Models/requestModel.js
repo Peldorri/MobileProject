@@ -13,10 +13,10 @@ var subLocation={
 
    category: String,
    description: String,
-   avaiableTimeStart: {type: Date, default: Date.now},
+   avaliableTimeStart: {type: Date, default: Date.now},
    avaliableTimeEnd: {type: Date, default: Date.now},
    region: String,
-   isTaken:{type: Boolean, default: false},
+
    worker: { type: Schema.Types.ObjectId, ref: 'user' },
    consumer: { type: Schema.Types.ObjectId, ref: 'consumer' },
    location:[subLocation]
