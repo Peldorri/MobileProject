@@ -2,10 +2,11 @@ var mongoose= require('mongoose'),
     Schema=mongoose.Schema,
     request=require('./requestModel');
 var subLocation={
-    lat: Number,
-    long: Number,
+    lat: String,
+    long: String,
     timestamp:{type: Date, default: Date.now},
      _id : false
+
  };
 
 var consumer= new Schema({
@@ -13,6 +14,8 @@ var consumer= new Schema({
     email: String,
     number: String,
     password: String,
+    token: String,
+    hasToken:{Type:Boolean, default: false};
     location:[subLocation],
     requests: [{ type: Schema.Types.ObjectId, ref: 'request' }]
 

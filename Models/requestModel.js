@@ -13,7 +13,7 @@ var subLocation={
 
    category: String,
    description: String,
-   avaliableTimeStart: {type: Date, default: Date.now},
+   avaiableTimeStart: {type: Date, default: Date.now},
    avaliableTimeEnd: {type: Date, default: Date.now},
    region: String,
    isTaken:{type: Boolean, default: false},

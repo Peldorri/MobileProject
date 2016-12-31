@@ -3,8 +3,8 @@ var mongoose= require('mongoose'),
     request=require('./requestModel');
 
 var subLocation={
-    lat: Number,
-    long: Number,
+    lat: String,
+    long: String,
     timestamp:{type: Date, default: Date.now},
      _id : false
  };
