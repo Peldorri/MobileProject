@@ -9,8 +9,8 @@ var fcmFun= function(body, deviceID){
       collapse_key : Math.random().toString(),
       notification : {
           title : 'Pre-Fix',
-          body : 'Your '+body+' request has been accepted'//,
-        //  click_action: ''
+          body : 'Your '+body+' request has been accepted',
+          click_action: 'com.noha.prefixconsumerapplication.MainActivity'
         }};
  console.log(FCM);
   fcm.send(message, function(err,response){
