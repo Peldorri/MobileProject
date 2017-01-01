@@ -11,7 +11,7 @@ var user= new Schema ({
   password: String,
   rate: {type:Number, default: 0},
   catergory: String,
-  counter:Number,
+  counter:{type:Number, default: 0},
   requests: [{ type: Schema.Types.ObjectId, ref: 'Requests' }]
 
 });
