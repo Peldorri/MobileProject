@@ -59,11 +59,13 @@ var requestController= function(Requests){
         if(err)
             res.status(500).send(err);
         else {
+
             res.json(requests);
         }
     });
   }
 
+  
 
   return{
     post:post,

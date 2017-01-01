@@ -1,6 +1,6 @@
 var mongoose= require('mongoose'),
     Schema=mongoose.Schema,
-    user=require('./userModel'),
+    User=require('./userModel'),
     consumer=require('./consumerModel');
 var subLocation={
     lat: String,
@@ -16,8 +16,8 @@ var subLocation={
    avaliableTimeStart: {type: Date, default: Date.now},
    avaliableTimeEnd: {type: Date, default: Date.now},
    region: String,
-
-   worker: { type: Schema.Types.ObjectId, ref: 'user' },
+   isTaken:{type: Boolean, default: false},
+   worker: { type: Schema.Types.ObjectId, ref: 'User' },
    consumer: { type: Schema.Types.ObjectId, ref: 'consumer' },
    location:[subLocation]
 

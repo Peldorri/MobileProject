@@ -11,6 +11,9 @@ var userController= require('../Controllers/userController')(Users);
   userRouters.route('/:userId/addrequest/:requestId')
             .patch(userController.acceptRequest);
 
+  userRouters.route('/:userId/history')
+            .get(userController.history);
+
   userRouters.route('/signup')
             .post(userController.signup);
 

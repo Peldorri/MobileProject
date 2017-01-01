@@ -15,7 +15,9 @@ consumerRouters.route('/signup')
             .post(consumerController.signup);
 
 consumerRouters.route('/:consumerId/request')
-            .post(consumerController.pushRequests);
+            .post(consumerController.pushRequests)
+            .get(consumerController.getRequests);
+
 
   consumerRouters.use('/:consumerId',function(req,res,next){
         Consumers.findById(req.params.consumerId,function(err,consumer){

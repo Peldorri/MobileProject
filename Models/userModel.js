@@ -1,13 +1,7 @@
 var mongoose= require('mongoose'),
     Schema=mongoose.Schema,
-    request=require('./requestModel');
+    Requests=require('./requestModel');
 
-var subLocation={
-    lat: String,
-    long: String,
-    timestamp:{type: Date, default: Date.now},
-     _id : false
- };
 
 var user= new Schema ({
 
@@ -15,11 +9,10 @@ var user= new Schema ({
   email: String,
   number: String,
   password: String,
-  rate: Number,
+  rate: {type:Number, default: 0},
   catergory: String,
-
-  location:[subLocation],
-  requests: [{ type: Schema.Types.ObjectId, ref: 'request' }]
+  counter:Number,
+  requests: [{ type: Schema.Types.ObjectId, ref: 'Requests' }]
 
 });
 

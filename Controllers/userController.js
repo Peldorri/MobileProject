@@ -1,4 +1,5 @@
 var Requests= require('../Models/requestModel');
+var Consumer= require('../Models/consumerModel');
 var bCrypt = require('bcrypt-nodejs');
 
 var userController= function(Users){
@@ -121,6 +122,12 @@ var userController= function(Users){
                           throw err;
                       }
                       console.log('User Registration succesful');
+                      Consumer.findById(request.consumer, function(err, consumer){
+                        console.log(req.body);
+                            require('./consumerNotificationController')(request.category, consumer.token);
+
+                      });
+
                       return res.status(200).json(request);
                   });
               });
@@ -132,7 +139,20 @@ var userController= function(Users){
       });
 }
 
+var history= function(req,res){
 
+        Users.findById(req.params.userId)
+                .populate('requests')
+                .exec(function(err, request){
+                    if(err)
+                      res.status(500).send(err);
+                    else if(request){
+                        res.status(200).json(request);
+
+                    }
+                });
+
+}
 
   return{
 
@@ -140,7 +160,8 @@ var userController= function(Users){
     patch:patch,
     delete:remove,
     acceptRequest:acceptRequest,
-    signup:signup
+    signup:signup,
+    history:history
   }
   var createHash = function(password){
       return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);

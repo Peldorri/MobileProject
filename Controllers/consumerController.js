@@ -1,4 +1,5 @@
 var Requests= require('../Models/requestModel');
+var User= require('../Models/userModel');
 var bCrypt = require('bcrypt-nodejs');
 var mongoose= require('mongoose');
 var consumerController= function(Consumers){
@@ -65,12 +66,12 @@ var consumerController= function(Consumers){
         if(err)
           res.status(500).send(err);
         else if(consumer){
-          
+
 
           consumer.requests.push(requests)
           consumer.save();
 
-          require('./notificationsController')(req.body.category,req.body.description);
+          require('./notificationsController')(req.body.category);
           res.status(201).send(consumer);
         }
       });
@@ -126,13 +127,35 @@ var consumerController= function(Consumers){
         }
 
 
+    var getRequests = function(req, res){
+
+      Consumers.findById(req.params.consumerId).lean()
+              .populate({path :'requests', match:{isTaken:true}})
+              .exec(function(err, request){
+                  if(err)
+                    res.status(500).send(err);
+                  else if(request){
+                      Requests.populate(request,{
+                        path: 'requests.worker', model: User, select: 'name rate _id number counter'
+                      }, function (err, user) {
+                          res.status(200).json(user);
+                      });
+
+                    //  res.status(200).json(request);
+
+                  }
+              });
+    }
+
+
   return{
     post:post,
     get:get,
     patch:patch,
     delete:remove,
     pushRequests:pushRequests,
-    signup:signup
+    signup:signup,
+    getRequests:getRequests
 
 
   }
