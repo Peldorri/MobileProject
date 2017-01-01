@@ -9,7 +9,8 @@ var fcmFun= function(body, deviceID){
       collapse_key : Math.random().toString(),
       notification : {
           title : 'Pre-Fix',
-          body : 'Your '+body+' request has been accepted'
+          body : 'Your '+body+' request has been accepted'//,
+        //  click_action: ''
         }};
  console.log(FCM);
   fcm.send(message, function(err,response){

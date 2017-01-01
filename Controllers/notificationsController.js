@@ -9,7 +9,8 @@ var fcmFun= function(body){
       collapse_key : Math.random().toString(),
       notification : {
           title : 'Pre-Fix',
-          body : 'You have got a new ' +body+ ' request'
+          body : 'You have got a new ' +body+ ' request',
+          click_action: 'com.noha.prefixworkerapplication.MainActivity'
         }};
  console.log(FCM);
   fcm.send(message, function(err,response){
