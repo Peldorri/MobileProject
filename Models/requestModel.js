@@ -17,6 +17,7 @@ var subLocation={
    avaliableTimeEnd: {type: Date, default: Date.now},
    region: String,
    isTaken:{type: Boolean, default: false},
+   isFinished:{type: Boolean, default: false},
    worker: { type: Schema.Types.ObjectId, ref: 'User' },
    consumer: { type: Schema.Types.ObjectId, ref: 'consumer' },
    location:[subLocation]

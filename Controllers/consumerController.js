@@ -147,6 +147,25 @@ var consumerController= function(Consumers){
               });
     }
 
+    var getFinishedRequests = function(req, res){
+
+      Consumers.findById(req.params.consumerId).lean()
+              .populate({path :'requests', match:{isFinished:true}})
+              .exec(function(err, request){
+                  if(err)
+                    res.status(500).send(err);
+                  else if(request){
+                      Requests.populate(request,{
+                        path: 'requests.worker', model: User, select: 'name rate _id number counter'
+                      }, function (err, user) {
+                          res.status(200).json(user);
+                      });
+
+                    //  res.status(200).json(request);
+
+                  }
+              });
+    }
 
   return{
     post:post,
@@ -155,7 +174,8 @@ var consumerController= function(Consumers){
     delete:remove,
     pushRequests:pushRequests,
     signup:signup,
-    getRequests:getRequests
+    getRequests:getRequests,
+    getFinishedRequests:getFinishedRequests
 
 
   }
