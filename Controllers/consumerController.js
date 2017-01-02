@@ -130,7 +130,7 @@ var consumerController= function(Consumers){
     var getRequests = function(req, res){
 
       Consumers.findById(req.params.consumerId).lean()
-              .populate({path :'requests', match:{isTaken:true}})
+              .populate({path :'requests', match:{isTaken:true, isFinished: false}})
               .exec(function(err, request){
                   if(err)
                     res.status(500).send(err);
